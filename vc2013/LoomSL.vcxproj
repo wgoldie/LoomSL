@@ -143,6 +143,7 @@
     <ClCompile Include="..\src\LoomSLApp.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\include\DobbyLoom.h" />
     <ClInclude Include="..\include\Loom.h" />
     <ClInclude Include="..\include\Resources.h" />
     <ClInclude Include="..\blocks\UI\src\Alignments.h" />

@@ -6,23 +6,29 @@ using namespace std;
 using namespace ci;
 using namespace ci::gl;
 
-Loom::Loom(Surface _warp, bool(*_pushPick)(ivec2))
+Loom::Loom(Surface _warp, int _warpWidth, bool(*_pushPick)(ivec2))
 {
-	this->warp = _warp;
-	this->pushPick = _pushPick;
+	warp = _warp;
+	pushPick = _pushPick;
+	warpWidth = _warpWidth;
 }
 
-Surface Loom::Weave(Surface weft)	
+Surface Loom::Weave(Surface weft, int weftWidth)
 {
-	Surface r(this->warp.getWidth(), weft.getHeight(), false);
-	Surface::Iter iter = r.getIter();
-	while (iter.line()) {
-		while (iter.pixel()) {
-			vec2 p = iter.getPos();
-			auto pick = this->pushPick(p) ? this->warp.getPixel(vec2(p.x, 0)) : weft.getPixel(vec2(0, p.y));
-			iter.r() = pick.r;
-			iter.g() = pick.g;
-			iter.b() = pick.b;
+	Surface r(warp.getWidth(), weft.getHeight(), false);
+	int warpThreads = warp.getWidth() / warpWidth;
+	int weftThreads = weft.getHeight() / weftWidth;
+
+	for (int y = 0; y < weftThreads; y++) {
+		for (int x = 0; x < warpThreads; x++) {
+			vec2 p(x * warpWidth, y * weftWidth);
+
+			if (pushPick(vec2(x, y))) {
+				r.copyFrom(warp, Area(p.x, 0, p.x + warpWidth, weftWidth), vec2(0, p.y));
+			}
+			else {
+				r.copyFrom(weft, Area(0, p.y, warpWidth, p.y + weftWidth), vec2(p.x, 0));
+			}
 		}
 	}
 

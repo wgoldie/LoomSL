@@ -21,18 +21,23 @@ private:
 };
 
 static bool simpleWeavePP(ivec2 p) {
-	return (p.x + p.y) % 8 == 0;
+	return (p.x + p.y) % 2 == 0;
 }
-
 
 void LoomSLApp::setup()
 {
-	Surface warp(500, 1, false);
+	int warpWidth = 20;
+	int weftWidth = 30;
+	int warpThreads = 50;
+	int weftThreads = 50;
+
+	Surface warp(warpThreads * warpWidth, weftWidth, false);
 	ip::fill(&warp, Color8u(255, 255, 255));
-	Surface weft(1, 500, false);
+	Surface weft(warpWidth, weftThreads * weftWidth, false);
 	ip::fill(&weft, Color8u(255, 0, 0));
-	Loom loom(warp, *simpleWeavePP);
-	this->cloth = loom.Weave(weft);
+	Loom loom(warp, warpWidth, *simpleWeavePP);
+
+	this->cloth = loom.Weave(weft, weftWidth);
 	this->clothT = Texture::create(cloth);
 }
 
