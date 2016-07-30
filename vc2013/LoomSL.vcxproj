@@ -139,6 +139,7 @@
     <ClCompile Include="..\blocks\UI\src\Waveform.cpp" />
     <ClCompile Include="..\blocks\UI\src\WindowCanvas.cpp" />
     <ClCompile Include="..\blocks\UI\src\XYPad.cpp" />
+    <ClCompile Include="..\src\DobbyLoom.cpp" />
     <ClCompile Include="..\src\Loom.cpp" />
     <ClCompile Include="..\src\LoomSLApp.cpp" />
   </ItemGroup>

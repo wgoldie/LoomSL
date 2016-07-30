@@ -2,7 +2,7 @@
 #include "cinder/app/RendererGl.h"
 #include "cinder/gl/gl.h"
 #include "cinder/gl/Texture.h"
-#include "Loom.h"
+#include "DobbyLoom.h"
 #include "cinder/ip/Fill.h"
 
 using namespace ci;
@@ -26,18 +26,31 @@ static bool simpleWeavePP(ivec2 p) {
 
 void LoomSLApp::setup()
 {
-	int warpWidth = 20;
+	int warpWidth = 30;
 	int weftWidth = 30;
-	int warpThreads = 50;
-	int weftThreads = 50;
+	int warpThreads = 5;
+	int weftThreads = 7;
+
+	vector<vector<bool>> dobbies = {
+		{ 0, 0, 1, 0, 0 },
+		{ 0, 1, 1, 1, 0 },
+		{ 1, 1, 1, 1, 1 }
+	};
+
+	vector<int> dobbySequence = {
+		0, 1, 2, 1, 2, 1, 0
+	};
 
 	Surface warp(warpThreads * warpWidth, weftWidth, false);
 	ip::fill(&warp, Color8u(255, 255, 255));
 	Surface weft(warpWidth, weftThreads * weftWidth, false);
 	ip::fill(&weft, Color8u(255, 0, 0));
-	Loom loom(warp, warpWidth, *simpleWeavePP);
 
-	this->cloth = loom.Weave(weft, weftWidth);
+	DobbyLoom loom(warp, warpWidth, dobbies);
+
+	// Loom loom(warp, warpWidth, *simpleWeavePP);
+
+	this->cloth = loom.Weave(weft, weftWidth, dobbySequence);
 	this->clothT = Texture::create(cloth);
 }
 

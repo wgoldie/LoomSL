@@ -6,7 +6,7 @@ using namespace std;
 using namespace ci;
 using namespace ci::gl;
 
-Loom::Loom(Surface _warp, int _warpWidth, bool(*_pushPick)(ivec2))
+Loom::Loom(Surface _warp, int _warpWidth, std::function<bool(ivec2)> _pushPick)
 {
 	warp = _warp;
 	pushPick = _pushPick;

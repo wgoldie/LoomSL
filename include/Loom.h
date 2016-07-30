@@ -9,10 +9,10 @@ using namespace ci::gl;
 
 class Loom {
 public:
-	Loom(Surface warp, int warpWidth, bool(*_pushPick)(ivec2));
+	Loom(Surface _warp, int _warpWidth, std::function<bool(ivec2)> _pushPick);
 	Surface Weave(Surface weft, int weftWidth);
 private:
-	bool(*pushPick)(ivec2);
+	std::function<bool(ivec2)> pushPick;
 	Surface warp;
 	int warpWidth;
 };
