@@ -2,7 +2,7 @@
 #include "cinder/app/RendererGl.h"
 #include "cinder/gl/gl.h"
 #include "cinder/gl/Texture.h"
-#include "DobbyLoom.h"
+#include "TreadleLoom.h"
 #include "cinder/ip/Fill.h"
 
 using namespace ci;
@@ -29,28 +29,39 @@ void LoomSLApp::setup()
 	int warpWidth = 30;
 	int weftWidth = 30;
 	int warpThreads = 5;
-	int weftThreads = 7;
+	int weftThreads = 30;
 
-	vector<vector<bool>> dobbies = {
+	vector<vector<int>> treadles = {
+		{ 2 },
+		{ 1, 3 },
+		{ 0, 4 },
+	};
+
+	vector<vector<int>> treadleSequence = {
+		{ 0 },
+		{ 0, 1 },
+		{ 0, 1, 2 },
+		{ 0, 1 },
+	};
+
+	vector<vector<bool>> cards = {
 		{ 0, 0, 1, 0, 0 },
 		{ 0, 1, 1, 1, 0 },
-		{ 1, 1, 1, 1, 1 }
+		{ 1, 1, 1, 1, 1 },
+		{ 0, 1, 1, 1, 0 },
 	};
 
-	vector<int> dobbySequence = {
-		0, 1, 2, 1, 2, 1, 0
-	};
 
 	Surface warp(warpThreads * warpWidth, weftWidth, false);
 	ip::fill(&warp, Color8u(255, 255, 255));
 	Surface weft(warpWidth, weftThreads * weftWidth, false);
 	ip::fill(&weft, Color8u(255, 0, 0));
 
-	DobbyLoom loom(warp, warpWidth, dobbies);
+	TreadleLoom loom(warp, warpWidth, treadles);
 
 	// Loom loom(warp, warpWidth, *simpleWeavePP);
 
-	this->cloth = loom.Weave(weft, weftWidth, dobbySequence);
+	this->cloth = loom.Weave(weft, weftWidth, treadleSequence);
 	this->clothT = Texture::create(cloth);
 }
 

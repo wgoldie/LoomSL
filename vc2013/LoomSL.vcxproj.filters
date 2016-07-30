@@ -246,7 +246,10 @@
     <ClCompile Include="..\src\LoomSLApp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\DobbyLoom.cpp">
+    <ClCompile Include="..\src\JaquardLoom.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\TreadleLoom.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -257,7 +260,10 @@
     <ClInclude Include="..\include\Loom.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\DobbyLoom.h">
+    <ClInclude Include="..\include\JaquardLoom.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\TreadleLoom.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -139,12 +139,13 @@
     <ClCompile Include="..\blocks\UI\src\Waveform.cpp" />
     <ClCompile Include="..\blocks\UI\src\WindowCanvas.cpp" />
     <ClCompile Include="..\blocks\UI\src\XYPad.cpp" />
-    <ClCompile Include="..\src\DobbyLoom.cpp" />
+    <ClCompile Include="..\src\JaquardLoom.cpp" />
     <ClCompile Include="..\src\Loom.cpp" />
     <ClCompile Include="..\src\LoomSLApp.cpp" />
+    <ClCompile Include="..\src\TreadleLoom.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\include\DobbyLoom.h" />
+    <ClInclude Include="..\include\JaquardLoom.h" />
     <ClInclude Include="..\include\Loom.h" />
     <ClInclude Include="..\include\Resources.h" />
     <ClInclude Include="..\blocks\UI\src\Alignments.h" />
@@ -187,6 +188,7 @@
     <ClInclude Include="..\blocks\UI\src\Waveform.h" />
     <ClInclude Include="..\blocks\UI\src\WindowCanvas.h" />
     <ClInclude Include="..\blocks\UI\src\XYPad.h" />
+    <ClInclude Include="..\include\TreadleLoom.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />
